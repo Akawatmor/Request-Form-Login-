@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/webstyle.css">
     <script src="./js/webscript.js"></script> 
 </head>
-<body>
+<body onload="startFunction()">
 
     <div class="login-container">
         <h1>Login</h1>
@@ -28,7 +28,7 @@
             <input type="checkbox" onclick="showPassword()">Show Password
             <br>
 
-            <label for="cars">User Type</label>
+            <label for="utype">User Type</label>
 
             <select name="User type" id="utype">
                 <option value="none">Select Role</option>
@@ -37,13 +37,37 @@
                 <option value="teacher">Teacher</option>
                 <option value="sysadmin">Admin</option>
             </select>
-            <p>Detected : </p>
+            <p id="utype_detect">Detected : </p>
 
             <br>
             <br>
             <button type="button" onclick="APIRequest()">Login</button>
-            <p id="output">out</p>
+            
+
         </form>
+        <p id="output">out</p>
+
+            <div id="studentlogin">
+                <button type="button">My Dashboard</button>
+                <button type="button">New Form Request</button>
+                <button type="button" onclick="location.reload()">Logout</button>
+            </div>
+            <div id="teacherlogin">
+                <button type="button">My Dashboard</button>
+                <button type="button">View incoming form</button>
+                <button type="button" onclick="location.reload()">Logout</button>
+            </div>
+            <div id="adminlogin">
+                <input type="checkbox">Enable Mismatch User Type (Except 'Select Role')</input>
+                <br>
+                <input type="checkbox">Show All User Element on startup</input>
+                <br>
+                <label>admin Password</label>
+                <input type="text"></input>
+                <br>
+                <button type="button">Save Setting</button>
+                <button type="button" onclick="reload()">Reload</button>
+            </div>
     </div>
 </body>
 

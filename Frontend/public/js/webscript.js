@@ -1,9 +1,15 @@
 const { isUtf8 } = require('buffer');
 const { json } = require('stream/consumers');
 
+function startFunction(){
+  toggleStudentForm(0);
+  toggleTeacherForm(0);
+  toggleAdminForm(0);
+}
 function APIRequest(){
   const name = document.getElementById("username").value;
   const pass = document.getElementById("password").value;
+  const utype = document.getElementById("utype").value;
   var json2;
 
   if(checkField()){
@@ -22,10 +28,41 @@ function APIRequest(){
     })
     .then(response => response.json())
     .then(json => {
+
     console.log(json);
+    
     if (json.status == true){
-      console.log(json.displayname_th);
-      document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
+      if(json.type == utype){
+
+        console.log(json.displayname_th);
+        document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
+        if (json.type == "student")
+          isStudent();
+
+        if (json.type == "teacher")
+          isTeacher();
+        
+      }
+      else if(utype == "auto"){
+        document.getElementById("utype_detect").innerText = "Detected : "+json.type;
+        console.log(json.displayname_th);
+        document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
+      }
+      else if (0 & utype != "none"){
+        console.warn("Config of mismatch type is set to 1, this mismatch type will must be unset in later date!");
+        console.log(json.displayname_th);
+        document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
+      }
+      else{
+        console.error("Type mismatch! please change to correct type!");
+        document.getElementById("output").innerText = "Error : Type mismatch";
+      }
+
+      stu = 1;
+      tea = 0;
+      adm = 0;
+      
+      
     }
     else{
       document.getElementById("output").innerText = "Error : " + json.message;
@@ -41,6 +78,24 @@ function APIRequest(){
     console.error("Error : Username or Password Cannot be blank!");
   }
   
+}
+
+function isStudent(){
+  toggleStudentForm(1);
+  toggleTeacherForm(0);
+  toggleAdminForm(0);
+}
+
+function isTeacher(){
+  toggleStudentForm(0);
+  toggleTeacherForm(1);
+  toggleAdminForm(0);
+}
+
+function isNone(){
+  toggleStudentForm(0);
+  toggleTeacherForm(0);
+  toggleAdminForm(0);
 }
 
 function showPassword(){
@@ -62,11 +117,39 @@ function checkField(){
     if(pass)document.getElementById("password").style.border = "5px solid red";
     else document.getElementById("password").style.border = "none";
 
-
-    alert("User or Password cannot be blank")
+    text = "User or Password cannot be blank";
+    alert(text);
+    document.getElementById("output").innerText = text;
   }
   else
     return 1;
+}
+
+function toggleStudentForm(argument){
+  var argform = document.getElementById("studentlogin");
+  if (argument)
+    argform.style.display = "block";
+  else
+    argform.style.display = "none";
+  
+}
+
+function toggleTeacherForm(argument){
+  var argform = document.getElementById("teacherlogin");
+  if (argument)
+    argform.style.display = "block";
+  else
+    argform.style.display = "none";
+  
+}
+
+function toggleAdminForm(argument){
+  var argform = document.getElementById("adminlogin");
+  if (argument)
+    argform.style.display = "block";
+  else
+    argform.style.display = "none";
+  
 }
 
 
@@ -93,7 +176,6 @@ function call_RESTAPI(){
 function call_API(){
 	
 
-var https = require('https');
 
 var options = {
   'method': 'GET',

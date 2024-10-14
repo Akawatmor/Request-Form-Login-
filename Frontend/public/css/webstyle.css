@@ -29,6 +29,27 @@ body{
 }
 
 #password{
-    
+
     border: none;
+}
+
+#studentlogin{
+    padding: 50px 0;
+    text-align: center;
+    background-color: lightblue;
+    margin-top: 20px;
+}
+
+#teacherlogin{
+    padding: 50px 0;
+    text-align: center;
+    background-color: lightblue;
+    margin-top: 20px;
+}
+
+#adminlogin{
+    padding: 50px 0;
+    text-align: center;
+    background-color: lightblue;
+    margin-top: 20px;
 }
