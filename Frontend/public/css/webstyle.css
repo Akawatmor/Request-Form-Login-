@@ -4,7 +4,7 @@
     text-align: center;
     padding: 70px 0;
     border: 1px solid #ccc;
-    width: 300px;
+    width: 500px;
     margin: 0 auto;
     background-color: #4CAF50;
 }
@@ -26,4 +26,9 @@ button {
 
 body{
     background-color: aquamarine;
+}
+
+#password{
+    
+    border: none;
 }

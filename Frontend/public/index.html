@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="10">
+    <meta http-equiv="refresh" content="100">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +15,9 @@
     <div class="login-container">
         <h1>Login</h1>
         <br>
+        <h2>โปรดกรอกรายละเอียดให้ครบถ้วน เพื่อใช้งานระบบ</h2>
+        <br>
         <form>
-
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <br>
@@ -24,21 +25,23 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <br>
+            <input type="checkbox" onclick="showPassword()">Show Password
             <br>
 
             <label for="cars">User Type</label>
 
             <select name="User type" id="utype">
-              <option value="auto">Auto</option>
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-              <option value="sysadmin">Admin</option>
-            </select> 
+                <option value="none">Select Role</option>
+                <option value="auto">Auto</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="sysadmin">Admin</option>
+            </select>
+            <p>Detected : </p>
 
             <br>
             <br>
-            <button onclick="APIRequest()">Login</button>
-			<button onclick="call_API()">Nono</button>
+            <button type="button" onclick="APIRequest()">Login</button>
             <p id="output">out</p>
         </form>
     </div>
