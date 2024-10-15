@@ -30,8 +30,12 @@ function APIRequest(){
     .then(json => {
 
     console.log(json);
+
+    
     
     if (json.status == true){
+     
+
       if(json.type == utype){
 
         console.log(json.displayname_th);
@@ -43,6 +47,11 @@ function APIRequest(){
           isTeacher();
         
       }
+      else if (utype == "none"){
+        console.error("Error2 : Please select role");
+        document.getElementById("output").innerText = "Error2 : Please select role";
+      }
+
       else if(utype == "auto"){
         document.getElementById("utype_detect").innerText = "Detected : "+json.type;
         console.log(json.displayname_th);
@@ -55,12 +64,8 @@ function APIRequest(){
       }
       else{
         console.error("Type mismatch! please change to correct type!");
-        document.getElementById("output").innerText = "Error : Type mismatch";
+        document.getElementById("output").innerText = "Error3: Role mismatch";
       }
-
-      stu = 1;
-      tea = 0;
-      adm = 0;
       
       
     }
@@ -117,9 +122,10 @@ function checkField(){
     if(pass)document.getElementById("password").style.border = "5px solid red";
     else document.getElementById("password").style.border = "none";
 
-    text = "User or Password cannot be blank";
+    text = "Error 1: User or Password cannot be blank";
     alert(text);
     document.getElementById("output").innerText = text;
+    document.getElementById("output").style.color = "red";
   }
   else
     return 1;

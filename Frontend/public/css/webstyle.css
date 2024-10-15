@@ -1,3 +1,9 @@
+@font-face {
+    font-family: notosans_med;
+    src: url(../font/notosans/NotoSansThai-Medium.ttf);
+}
+
+
 .login-container {
     margin: auto;
     right : 0px;
@@ -5,8 +11,48 @@
     padding: 70px 0;
     border: 1px solid #ccc;
     width: 500px;
-    margin: 0 auto;
-    background-color: #4CAF50;
+    background-color: #ffffff;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    margin-top: 50px;
+}
+
+.login-input{
+    border : 1px solid black;
+    padding-top: 40px;
+    
+}
+
+.login-inuser{
+    width: 250px;
+    height: 20px;
+    border : 1px solid black;
+    font-size:20px;
+    margin-bottom : 20px;
+    font-family: notosans_med;
+}
+.login-inpass{
+    width: 250px;
+    height: 20px;
+    border : 1px solid black;
+    font-size:20px;
+    margin-bottom : 20px;
+    font-family: notosans_med;
+}
+
+.login-show{
+    position: absolute;
+    float: right;
+    margin-top: 15px;
+    margin-right: -10px;
+
+
+}
+
+.login-password{
+    border: 1px solid black;
 }
 
 input {
@@ -22,10 +68,15 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: notosans_med;
+    font-size: 20px;
+    width: 500px;
 }
 
 body{
-    background-color: aquamarine;
+    background: rgb(229,229,244);
+    background: linear-gradient(90deg, rgba(229,229,244,1) 0%, rgba(164,201,242,1) 100%);
+    
 }
 
 #password{
@@ -52,4 +103,22 @@ body{
     text-align: center;
     background-color: lightblue;
     margin-top: 20px;
+}
+
+#headlogin{
+    font-family: notosans_med;
+    text-align: left;
+}
+
+#utype{
+    height:40px;
+    width: 200px;
+    font-family: notosans_med;
+    font-size: 15px;
+
+}
+
+#output{
+    font-family: notosans_med;
+    font-size:20px;
 }
