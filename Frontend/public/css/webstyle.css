@@ -25,22 +25,6 @@
     
 }
 
-.login-inuser{
-    width: 250px;
-    height: 20px;
-    border : 1px solid black;
-    font-size:20px;
-    margin-bottom : 20px;
-    font-family: notosans_med;
-}
-.login-inpass{
-    width: 250px;
-    height: 20px;
-    border : 1px solid black;
-    font-size:20px;
-    margin-bottom : 20px;
-    font-family: notosans_med;
-}
 
 .login-show{
     position: absolute;
@@ -51,14 +35,11 @@
 
 }
 
-.login-password{
-    border: 1px solid black;
-}
 
 input {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 button {
@@ -79,10 +60,50 @@ body{
     
 }
 
-#password{
+#password {
+    width: 250px;
+    height: 20px;
+    border : 5px solid rgba(0, 0, 0, 0.3);
+    font-size:20px;
+    margin-bottom : 20px;
+    font-family: notosans_med;
 
-    border: none;
 }
+
+#password-show{
+    float:right;
+    position: relative;
+}
+
+#username{
+    width: 250px;
+    height: 20px;
+    border : 5px solid rgba(0, 0, 0, 0.3);
+    font-size:20px;
+    margin-bottom : 20px;
+    font-family: notosans_med;
+}
+
+#login-password{
+    border:1px solid black;
+}
+
+#hideicon{
+    position: absolute;
+    margin-top: 12px;
+    margin-left: -32px;
+    animation-duration: 4s;
+}
+
+#showicon{
+    position: absolute;
+    margin-top: 12px;
+    margin-left: -32px;
+    animation-duration: 4s;
+}
+
+
+
 
 #studentlogin{
     padding: 50px 0;

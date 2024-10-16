@@ -6,11 +6,34 @@ function startFunction(){
   toggleTeacherForm(0);
   toggleAdminForm(0);
 }
+
+
+
+  
+  
+  function togglePass(){
+  var hideicon = document.getElementById("hideicon");
+  var showicon = document.getElementById("showicon");
+  var passfield = document.getElementById("password");
+
+  if (passfield.type == "password"){
+    passfield.type = "text";
+    hideicon.style.display = "none";
+    showicon.style.display = "inline";
+  }
+  else{
+    passfield.type = "password";
+    hideicon.style.display = "inline";
+    showicon.style.display = "none";
+  }
+
+}
+
+
 function APIRequest(){
   const name = document.getElementById("username").value;
   const pass = document.getElementById("password").value;
   const utype = document.getElementById("utype").value;
-  var json2;
 
   if(checkField()){
 
@@ -103,15 +126,6 @@ function isNone(){
   toggleAdminForm(0);
 }
 
-function showPassword(){
-  var passfield = document.getElementById("password");
-  if (passfield.type == "password"){
-    passfield.type = "text";
-  }
-  else{
-    passfield.type = "password";
-  }
-}
 
 function checkField(){
   const name = document.getElementById("username").value == "";
