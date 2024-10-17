@@ -3,6 +3,16 @@
     src: url(../font/notosans/NotoSansThai-Medium.ttf);
 }
 
+@font-face {
+    font-family: comic_sans;
+    src: url(../font/comicsans/COMIC.TTF);
+}
+
+@font-face {
+    font-family: laithai;
+    src: url(../font/laithai/sathaporn.ttf);
+}
+
 
 .login-container {
     margin: auto;
@@ -11,17 +21,19 @@
     padding: 70px 0;
     border: 1px solid #ccc;
     width: 500px;
-    background-color: #ffffff;
+    background-color: #ffffffc0;
+    animation-name: openpage;
+    animation-duration: 0.75s ;
+    animation-timing-function: linear;
     padding-top: 50px;
     padding-right: 50px;
     padding-bottom: 50px;
     padding-left: 50px;
-    margin-top: 50px;
+    margin-top: 75px;
     box-shadow: 0px 0px 15px #000000; 
 }
 
 .login-input{
-    // border : 1px solid black;
     padding-top: 40px;
     
 }
@@ -76,8 +88,13 @@ button {
 
 
 body{
-    background: rgb(229,229,244);
+    /*background: rgb(229,229,244);
     background: linear-gradient(90deg, rgba(229,229,244,1) 0%, rgba(164,201,242,1) 100%);
+    */
+    background-image : url("../picture/bg01.jpg");
+    background-size : 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
     
 }
 
@@ -105,9 +122,6 @@ body{
     font-family: notosans_med;
 }
 
-#login-password{
-    // border:1px solid black;
-}
 
 #headlogin2{
     position: absolute;
@@ -120,7 +134,7 @@ body{
     position: absolute;
     margin-top: 12px;
     margin-left: -32px;
-    animation-duration: 4s;
+    animation-duration: 0.6s linear;
     cursor : pointer;
 }
 
@@ -191,4 +205,19 @@ body{
 
 #noneimp{
     cursor : not-allowed;
+}
+
+@keyframes openpage {
+    0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes linehighlight {
+    0%   { border : 5px solid rgba(0, 0, 0, 0.3);}
+  100% {border : 5px solid rgba(255, 0, 0, 255);}
+}
+
+
+footer{
+    font-family : comic_sans;
 }

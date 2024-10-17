@@ -174,12 +174,12 @@ function APIRequest(){
     fetch("https://restapi.tu.ac.th/api/v1/auth/Ad/verify", {
       method: "POST",
       body: JSON.stringify({
-        UserName: name,
-        PassWord: pass
+        "UserName": name,
+        "PassWord": pass
       }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      "Application-Key" : ""
+      "Application-Key" : "TUecac773883f2433fc71a4432562774ce8872bf7fc11dfa548c5808ba62166ed387af71abcc56b4f6da1014ea0197c7d6"
     }
 
     })
