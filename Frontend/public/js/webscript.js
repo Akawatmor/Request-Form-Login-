@@ -136,7 +136,7 @@ function APIRequest(){
       }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      "Application-Key" : "
+      "Application-Key" : ""
     }
 
     })

@@ -1,4 +1,0 @@
-{   
-    "_APIKeySetting" : "API Key; if specified 'None' will not accept any key; if specified '#' will read from private directory instead",
-    "APIKey" : "None" 
-}
