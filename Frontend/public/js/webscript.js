@@ -31,30 +31,40 @@ function printMessage(errorcode, messageinput){
   var pass = document.getElementById("password").value;
   const utype = document.getElementById("utype").value;
   var output = document.getElementById("output");
+  var output2 = document.getElementById("message2");
+  var output3 = document.getElementById("message3");
 
   const error1 = "Error 1 : Username or Password can't be empty!";
-  const error2 = "Error 2 : User Role isn't selected, please select one"
+  const error2 = "Error 2 : User Role isn't selected, please select your role"
   const error3 = "Error 3 : User Role mismatch with the user credential"
   const error4 = "Error 4 : Password is invalid! Please Re-enter Password"
   const error5 = "Error 5 : Cannot Request API"
+  const error6 = "Error 6 : Username is invaild! Please Re-enter Username & Password"
+  const error7 = "Error 7 : API Key Invalid! Please check API Key"
+  const error8 = "Error 8 : Request header is wrongly define! Cannot Continue"
 
-  const warning = "Warning 1 : User Role is mismatch with current user credential, but can allowed on"
+
+  const warning1 = "Warning 1 : User Role is mismatch with current user credential, but can allowed on"
 
   const normal1 = "Welcome "
   const normal2 = "ยินดีต้อนรับ "
-  const normal5 = "ระบบยังไม่ได้ Implement เนื่องด้วยเกินขอบเขตที่ได้บอกไว้"
+  const normal5 = "ระบบยังไม่ได้ Implement เนื่องด้วยเกินขอบเขตที่ได้บอกไว้ใน User Story"
 
   /* Input Error Code
   0X - 1X : Error ->
   1 : Username or password cannot be empty
   2 : User role isn't selected
-
+  3 :
+  4 :
+  5 :
 
   2X : Warning ->
+  1 :
 
   5X : Normal Message ->
   0 : {messageinput print}
   1 : ยินดีต้อนรับ {messageinput print}
+  5 : ระบบยังไม่ได้ Implement เนื่องด้วยเกินขอบเขตที่ได้บอกไว้
 
   */
 
@@ -93,6 +103,27 @@ function printMessage(errorcode, messageinput){
   
       break;
 
+    case 6:
+      console.error(error6);
+      output.innerText = error6;
+      output.style.color = "red";
+  
+      break;
+
+    case 7:
+      console.error(error7);
+      output.innerText = error7;
+      output.style.color = "red";
+  
+      break;
+
+    case 8:
+      console.error(error8);
+      output.innerText = error8;
+      output.style.color = "red";
+  
+      break;
+
     case 51:
       var messagefunc = "ยินดีต้อนรับ " + messageinput;
       console.log(messagefunc);
@@ -100,6 +131,15 @@ function printMessage(errorcode, messageinput){
       output.style.color = "black";
 
       break;
+    case 55:
+      var messagefunc = normal5;
+      console.log(messagefunc);
+      output2.innerText = messagefunc;
+      output2.style.color = "red";
+      output2.style.fontSize = "24px";
+      output3.innerText = messagefunc;
+      output3.style.color = "red";
+      output3.style.fontSize = "24px";
 
   }
 
@@ -124,6 +164,9 @@ function APIRequest(){
   const name = document.getElementById("username").value;
   const pass = document.getElementById("password").value;
   const utype = document.getElementById("utype").value;
+  var name1 = document.getElementById("username");
+  var pass1 = document.getElementById("password");
+  var utype1 = document.getElementById("utype");
 
 
   if(checkField()){
@@ -164,6 +207,7 @@ function APIRequest(){
       }
 
       else{
+        utype1.style.border = "5px solid rgba(256, 96, 0, 1)";
         printMessage(3,null);
       }
 
@@ -171,18 +215,33 @@ function APIRequest(){
 
     // cannot be requested api (Wrong name)
     else{
-
+      if (json.message == "Password Invalid!"){
       printMessage(4,null);
+      pass1.style.border = "5px solid rgba(256, 96, 0, 1)";
+      }
+
+      else if (json.message == "Users or Password Invalid!"){
+      printMessage(6,null);
+      pass1.style.border = "5px solid rgba(256, 96, 0, 1)";
+      name1.style.border = "5px solid rgba(256, 96, 0, 1)";
+
+      }
+
+      
+      else if (json.error == "Authentication failed due to the following reason: invalid token. Confirm that the access token in the authorization header is valid."){
+        printMessage(7,null);
+      }
+
     }
 
     })
     // catch other error
-    .catch(error => console.error("Error : ",error));
+    .catch(error => {
+      console.error("Error : ",error);
+      printMessage(8,null);
+    });
+    
 
-  }
-
-  else{
-    console.error("Error : Username or Password Cannot be blank!");
   }
   
 }
@@ -288,6 +347,18 @@ function toggleAdminForm(argument){
   
 }
 
+function unImplement(){
+
+  printMessage(55,null);
+}
+
+function logOut(){
+  var text = "Do you want to logout?";
+  if (confirm(text) == true) {
+    location.reload();
+  } else {}
+  
+}
 
 /*
 function call_RESTAPI(){

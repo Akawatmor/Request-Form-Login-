@@ -178,3 +178,17 @@ body{
     font-family: notosans_med;
     font-size:20px;
 }
+
+#message2{
+    font-family: notosans_med;
+    font-size:20px;
+}
+
+#message3{
+    font-family: notosans_med;
+    font-size:20px;
+}
+
+#noneimp{
+    cursor : not-allowed;
+}

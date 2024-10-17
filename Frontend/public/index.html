@@ -39,7 +39,7 @@
             <select name="User type" id="utype">
                 <option value="none">Select Role</option>
                 <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
+                <option value="employee">Teacher</option>
                 <option value="sysadmin">Admin</option>
             </select>
     </div>
@@ -53,30 +53,33 @@
 
         <tr>
             <td>
-                <button type="button">My Dashboard</button>
+                <button type="button" id="noneimp" onclick="unImplement()">My Dashboard</button>
             </td>
             <td>
-                <button type="button">New Request</button>
+                <button type="button" id="noneimp" onclick="unImplement()">New Request</button>
             </td>
             <td>
-                <button type="button" onclick="location.reload()">User Logout</button>
+                <button type="button" onclick="logOut()">User Logout</button>
             </td>
         </tr>
+
+    <p id="message2"></p>
         
     </div>
     <div id="teacherlogin">
-
         <tr>
             <td>
-                <button type="button">My Dashboard</button>
+                <button type="button" id="noneimp" onclick="unImplement()">My Dashboard</button>
             </td>
             <td>
-                <button type="button">Incoming Form</button>
+                <button type="button" id="noneimp" onclick="unImplement()">Incoming Form</button>
             </td>
             <td>
-                <button type="button" onclick="location.reload()">User Logout</button>
+                <button type="button" onclick="logOut()">User Logout</button>
             </td>
         </tr>
+
+    <p id="message3"></p>
     </div>
     
     <div id="adminlogin">
@@ -92,7 +95,7 @@
     </div>
 
     <div>
-        <footer>Version 1.1.2</footer>
+        <footer>Version 1.2.0</footer>
     </div>
     </div>
     
