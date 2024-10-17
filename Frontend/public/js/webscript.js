@@ -1,16 +1,13 @@
-const { isUtf8 } = require('buffer');
-const { json } = require('stream/consumers');
+
 
 function startFunction(){
+
   toggleStudentForm(0);
   toggleTeacherForm(0);
   toggleAdminForm(0);
+
 }
 
-
-
-  
-  
   function togglePass(){
   var hideicon = document.getElementById("hideicon");
   var showicon = document.getElementById("showicon");
@@ -29,11 +26,105 @@ function startFunction(){
 
 }
 
+function printMessage(errorcode, messageinput){
+  var name = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
+  const utype = document.getElementById("utype").value;
+  var output = document.getElementById("output");
+
+  const error1 = "Error 1 : Username or Password can't be empty!";
+  const error2 = "Error 2 : User Role isn't selected, please select one"
+  const error3 = "Error 3 : User Role mismatch with the user credential"
+  const error4 = "Error 4 : Password is invalid! Please Re-enter Password"
+  const error5 = "Error 5 : Cannot Request API"
+
+  const warning = "Warning 1 : User Role is mismatch with current user credential, but can allowed on"
+
+  const normal1 = "Welcome "
+  const normal2 = "ยินดีต้อนรับ "
+  const normal5 = "ระบบยังไม่ได้ Implement เนื่องด้วยเกินขอบเขตที่ได้บอกไว้"
+
+  /* Input Error Code
+  0X - 1X : Error ->
+  1 : Username or password cannot be empty
+  2 : User role isn't selected
+
+
+  2X : Warning ->
+
+  5X : Normal Message ->
+  0 : {messageinput print}
+  1 : ยินดีต้อนรับ {messageinput print}
+
+  */
+
+  switch (errorcode){
+    case 1:
+      console.error(error1)
+      output.innerText = error1;
+      output.style.color = "red";
+
+      break;
+    case 2:
+      console.error(error2);
+      output.innerText = error2;
+      output.style.color = "red";
+
+      break;
+
+    case 3:
+      console.error(error3);
+      output.innerText = error3;
+      output.style.color = "red";
+  
+      break;
+
+    case 4:
+      console.error(error4);
+      output.innerText = error4;
+      output.style.color = "red";
+  
+      break;
+
+    case 5:
+      console.error(error5);
+      output.innerText = error5;
+      output.style.color = "red";
+  
+      break;
+
+    case 51:
+      var messagefunc = "ยินดีต้อนรับ " + messageinput;
+      console.log(messagefunc);
+      output.innerText = messagefunc;
+      output.style.color = "black";
+
+      break;
+
+  }
+
+
+}
+
+function isEmpty(){
+  const user = document.getElementById("username").value == "";
+  const pass = document.getElementById("password").value == "";
+
+
+    if (user+pass){
+      printMessage(1,null);
+      return 1;
+    }
+    else{
+      return 0;
+    }
+}
 
 function APIRequest(){
   const name = document.getElementById("username").value;
   const pass = document.getElementById("password").value;
   const utype = document.getElementById("utype").value;
+
 
   if(checkField()){
 
@@ -45,61 +136,49 @@ function APIRequest(){
       }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      "Application-Key" : "TUecac773883f2433fc71a4432562774ce8872bf7fc11dfa548c5808ba62166ed387af71abcc56b4f6da1014ea0197c7d6"
+      "Application-Key" : "
     }
 
     })
     .then(response => response.json())
     .then(json => {
-
     console.log(json);
 
-    
-    
+    // can be request api without error
     if (json.status == true){
-     
 
+      // if type is the same
       if(json.type == utype){
+        printMessage(51,json.displayname_th);
 
-        console.log(json.displayname_th);
-        document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
-        if (json.type == "student")
+        if (utype == "student"){
           isStudent();
+          disableLogin();
+        }
 
-        if (json.type == "teacher")
+        if (utype == "employee"){
           isTeacher();
+          disableLogin();
+        }
         
       }
-      else if (utype == "none"){
-        console.error("Error2 : Please select role");
-        document.getElementById("output").innerText = "Error2 : Please select role";
-      }
 
-      else if(utype == "auto"){
-        document.getElementById("utype_detect").innerText = "Detected : "+json.type;
-        console.log(json.displayname_th);
-        document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
-      }
-      else if (0 & utype != "none"){
-        console.warn("Config of mismatch type is set to 1, this mismatch type will must be unset in later date!");
-        console.log(json.displayname_th);
-        document.getElementById("output").innerText = "ยินดีต้อนรับ " + json.displayname_th;
-      }
       else{
-        console.error("Type mismatch! please change to correct type!");
-        document.getElementById("output").innerText = "Error3: Role mismatch";
+        printMessage(3,null);
       }
-      
-      
-    }
-    else{
-      document.getElementById("output").innerText = "Error : " + json.message;
-    }
-    
 
+    }
+
+    // cannot be requested api (Wrong name)
+    else{
+
+      printMessage(4,null);
+    }
 
     })
+    // catch other error
     .catch(error => console.error("Error : ",error));
+
   }
 
   else{
@@ -126,23 +205,60 @@ function isNone(){
   toggleAdminForm(0);
 }
 
+function disableLogin(){
+  document.getElementById("username").disabled = true;
+  document.getElementById("password").disabled = true;
+  document.getElementById("utype").disabled = true;
+  document.getElementById("submitbutton").disabled = true;
+  document.getElementById("submitbutton").style.cursor = "not-allowed";
 
+  if (document.getElementById("password").type == "text"){
+    togglePass();
+  }
+
+  document.getElementById("hideicon").style.cursor = "not-allowed";
+  document.getElementById("showicon").style.cursor = "not-allowed";
+  document.getElementById("hideicon").setAttribute( "onclick", "javascript: doNothing();" );
+  document.getElementById("showicon").setAttribute( "onclick", "javascript: doNothing();" );
+
+}
+
+function doNothing(){
+
+}
+
+//check all field include utype
 function checkField(){
   const name = document.getElementById("username").value == "";
   const pass = document.getElementById("password").value == "";
-  if (name+pass){
-    if(name)document.getElementById("username").style.border = "5px solid red";
-    else document.getElementById("username").style.border = "none";
-    if(pass)document.getElementById("password").style.border = "5px solid red";
-    else document.getElementById("password").style.border = "none";
+  const usertype = document.getElementById("utype").value == "none";
 
-    text = "Error 1: User or Password cannot be blank";
-    alert(text);
-    document.getElementById("output").innerText = text;
-    document.getElementById("output").style.color = "red";
+  if (name){
+    document.getElementById("username").style.border = "5px solid red";
+    printMessage(1,null);
   }
-  else
-    return 1;
+  else{
+    document.getElementById("username").style.border = "5px solid rgba(0, 0, 0, 0.3)";
+  }
+
+  if (pass){
+    document.getElementById("password").style.border = "5px solid red";
+    printMessage(1,null);
+  }
+  else{
+    document.getElementById("password").style.border = "5px solid rgba(0, 0, 0, 0.3)";
+  }
+
+  if (usertype){
+    document.getElementById("utype").style.border = "5px solid red";
+    printMessage(2,null);
+  }
+  else{
+    document.getElementById("utype").style.border = "5px solid rgba(0, 0, 0, 0.3)";
+  }
+
+  return (name+pass+usertype) == 0;
+
 }
 
 function toggleStudentForm(argument){
@@ -173,7 +289,7 @@ function toggleAdminForm(argument){
 }
 
 
-
+/*
 function call_RESTAPI(){
     const name = document.getElementById("username").value;
     const pass = document.getElementById("password").value;
@@ -200,10 +316,10 @@ function call_API(){
 var options = {
   'method': 'GET',
    'hostname': 'restapi.tu.ac.th',
-  'path': '/api/v2/profile/std/info/?id=6609681231',
+  'path': '/api/v2/profile/std/info/?id=',
   'headers': {
     'Content-Type': 'application/json',
-    'Application-Key': 'TUecac773883f2433fc71a4432562774ce8872bf7fc11dfa548c5808ba62166ed387af71abcc56b4f6da1014ea0197c7d6'
+    'Application-Key': ''
   }
 };
 
@@ -226,7 +342,5 @@ var req = https.request(options, function (res) {
 
 req.end();
 
-
-
-
 }
+*/
