@@ -160,6 +160,36 @@ function isEmpty(){
     }
 }
 
+function CRUDAPI(receive){
+  fetch("http://localhost:8080/api/users", {
+    method: "POST",
+    body: JSON.stringify({
+      "username": receive.username,
+      "displayname_en": receive.displayname_en,
+      "email": receive.email,
+      "faculty": receive.faculty,
+      "type": receive.type,
+
+    }),
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+
+  }
+
+  })
+  .then(response => response.json())
+  .then(json => {
+    console.log(json)
+  })
+  .catch(error => {
+    console.error("Error : ",error);
+    printMessage(8,null);
+    alert("คุณไม่สามารถล็อกอินได้");
+  });
+
+
+}
+
 function APIRequest(){
   const name = document.getElementById("username").value;
   const pass = document.getElementById("password").value;
@@ -195,13 +225,11 @@ function APIRequest(){
         printMessage(51,json.displayname_th);
 
         if (utype == "student"){
-          isStudent();
-          disableLogin();
+          CRUDAPI(json)
         }
 
         if (utype == "employee"){
-          isTeacher();
-          disableLogin();
+          CRUDAPI(json)
         }
         
       }
@@ -209,6 +237,7 @@ function APIRequest(){
       else{
         utype1.style.border = "5px solid rgba(256, 96, 0, 1)";
         printMessage(3,null);
+        alert("คุณไม่สามารถล็อกอินได้");
       }
 
     }
@@ -218,19 +247,23 @@ function APIRequest(){
       if (json.message == "Password Invalid!"){
       printMessage(4,null);
       pass1.style.border = "5px solid rgba(256, 96, 0, 1)";
+      alert("คุณไม่สามารถล็อกอินได้");
       }
 
       else if (json.message == "Users or Password Invalid!"){
       printMessage(6,null);
       pass1.style.border = "5px solid rgba(256, 96, 0, 1)";
       name1.style.border = "5px solid rgba(256, 96, 0, 1)";
+      alert("คุณไม่สามารถล็อกอินได้");
 
       }
 
       
       else if (json.error == "Authentication failed due to the following reason: invalid token. Confirm that the access token in the authorization header is valid."){
         printMessage(7,null);
+        alert("คุณไม่สามารถล็อกอินได้");
       }
+      
 
     }
 
@@ -239,6 +272,7 @@ function APIRequest(){
     .catch(error => {
       console.error("Error : ",error);
       printMessage(8,null);
+      alert("คุณไม่สามารถล็อกอินได้");
     });
     
 
@@ -295,6 +329,8 @@ function checkField(){
   if (name){
     document.getElementById("username").style.border = "5px solid red";
     printMessage(1,null);
+    alert("คุณไม่สามารถล็อกอินได้");
+
   }
   else{
     document.getElementById("username").style.border = "5px solid rgba(0, 0, 0, 0.3)";
@@ -303,6 +339,7 @@ function checkField(){
   if (pass){
     document.getElementById("password").style.border = "5px solid red";
     printMessage(1,null);
+    alert("คุณไม่สามารถล็อกอินได้");
   }
   else{
     document.getElementById("password").style.border = "5px solid rgba(0, 0, 0, 0.3)";
@@ -311,6 +348,7 @@ function checkField(){
   if (usertype){
     document.getElementById("utype").style.border = "5px solid red";
     printMessage(2,null);
+    alert("คุณไม่สามารถล็อกอินได้");
   }
   else{
     document.getElementById("utype").style.border = "5px solid rgba(0, 0, 0, 0.3)";
